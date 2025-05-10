@@ -1,9 +1,18 @@
 import * as React from 'react'
-import { Link, Outlet, createRootRoute } from '@tanstack/react-router'
+import { HeadContent, Link, Outlet, createRootRoute } from '@tanstack/react-router'
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
+import styles from '../styles.css?url';
 
 export const Route = createRootRoute({
-  component: RootComponent,
+  head: () => ({
+    links: [
+      {
+        rel: 'stylesheet',
+        href: styles,
+      },
+    ],
+  }),
+  component: RootComponentWithHead,
   notFoundComponent: () => {
     return (
       <div>
@@ -13,6 +22,19 @@ export const Route = createRootRoute({
     )
   },
 })
+
+function RootComponentWithHead() {
+  return (
+    <html>
+      <head>
+        <HeadContent />
+      </head>
+      <body>
+        <RootComponent />
+      </body>
+    </html>
+  );
+}
 
 function RootComponent() {
   return (
