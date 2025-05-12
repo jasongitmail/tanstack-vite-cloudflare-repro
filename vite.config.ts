@@ -12,6 +12,7 @@ export default defineConfig({
         verboseFileRoutes: false,
         virtualRouteConfig: './routes.ts',
       },
+      target: "cloudflare_pages",
     }),
     tailwindcss(),
   ],

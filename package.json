@@ -1,5 +1,5 @@
 {
-  "name": "tanstack-router-react-example-basic-virtual-file-based",
+  "name": "tanstack-vite-cloudflare-repro",
   "private": true,
   "type": "module",
   "scripts": {

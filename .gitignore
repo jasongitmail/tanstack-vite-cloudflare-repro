@@ -8,3 +8,6 @@ dist-ssr
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+.tanstack-start/build
+.output
+.nitro
