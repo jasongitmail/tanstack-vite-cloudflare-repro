@@ -19,40 +19,75 @@ import {
   createServerFileRoute,
 } from '@tanstack/react-start/server'
 
+import { ServerRoute as ClassicApiHelloRouteImport } from './../../src/routes/file-based-subtree/api/hello'
+
 // Create/Update Routes
 
 const rootRoute = createServerRoute()
 
+const ClassicApiHelloRoute = ClassicApiHelloRouteImport.update({
+  id: '/classic/api/hello',
+  path: '/classic/api/hello',
+  getParentRoute: () => rootRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-start/server' {
-  interface FileRoutesByPath {}
+  interface FileRoutesByPath {
+    '/classic/api/hello': {
+      id: '/classic/api/hello'
+      path: '/classic/api/hello'
+      fullPath: '/classic/api/hello'
+      preLoaderRoute: typeof ClassicApiHelloRouteImport
+      parentRoute: typeof rootRoute
+    }
+  }
 }
 
 // Add type-safety to the createFileRoute function across the route tree
 
+declare module './../../src/routes/file-based-subtree/api/hello' {
+  const createServerFileRoute: CreateServerFileRoute<
+    FileRoutesByPath['/classic/api/hello']['parentRoute'],
+    FileRoutesByPath['/classic/api/hello']['id'],
+    FileRoutesByPath['/classic/api/hello']['path'],
+    FileRoutesByPath['/classic/api/hello']['fullPath'],
+    unknown
+  >
+}
+
 // Create and export the route tree
 
-export interface FileRoutesByFullPath {}
+export interface FileRoutesByFullPath {
+  '/classic/api/hello': typeof ClassicApiHelloRoute
+}
 
-export interface FileRoutesByTo {}
+export interface FileRoutesByTo {
+  '/classic/api/hello': typeof ClassicApiHelloRoute
+}
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
+  '/classic/api/hello': typeof ClassicApiHelloRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: never
+  fullPaths: '/classic/api/hello'
   fileRoutesByTo: FileRoutesByTo
-  to: never
-  id: '__root__'
+  to: '/classic/api/hello'
+  id: '__root__' | '/classic/api/hello'
   fileRoutesById: FileRoutesById
 }
 
-export interface RootRouteChildren {}
+export interface RootRouteChildren {
+  ClassicApiHelloRoute: typeof ClassicApiHelloRoute
+}
 
-const rootRouteChildren: RootRouteChildren = {}
+const rootRouteChildren: RootRouteChildren = {
+  ClassicApiHelloRoute: ClassicApiHelloRoute,
+}
 
 export const routeTree = rootRoute
   ._addFileChildren(rootRouteChildren)
@@ -63,7 +98,12 @@ export const routeTree = rootRoute
   "routes": {
     "__root__": {
       "filePath": "root.tsx",
-      "children": []
+      "children": [
+        "/classic/api/hello"
+      ]
+    },
+    "/classic/api/hello": {
+      "filePath": "file-based-subtree/api/hello.ts"
     }
   }
 }
