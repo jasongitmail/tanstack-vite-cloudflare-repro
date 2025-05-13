@@ -1,8 +1,7 @@
-import { defineConfig } from 'vite';
+// import tailwindcss from "@tailwindcss/vite";
 import { tanstackStart } from '@tanstack/react-start/plugin/vite';
-import tailwindcss from "@tailwindcss/vite";
+import { defineConfig } from 'vite';
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     tanstackStart({
@@ -12,8 +11,8 @@ export default defineConfig({
         verboseFileRoutes: false,
         virtualRouteConfig: './routes.ts',
       },
-      target: "cloudflare_pages",
+      target: "cloudflare_module",
     }),
-    tailwindcss(),
+    // tailwindcss(),
   ],
 });

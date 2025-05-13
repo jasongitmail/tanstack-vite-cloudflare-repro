@@ -1,10 +1,18 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "tanstack-vite-cloudflare-repro",
-
-  // Pages
   "compatibility_date": "2024-11-13",
   "compatibility_flags": ["nodejs_compat"],
-  // "pages_build_output_dir": "./dist",
-  "pages_build_output_dir": "./.output/server"
+  "workers_dev": true,
+  "main": "./.output/server/index.mjs",
+  "type": "esm",
+  "assets": {
+    "directory": "./.output/public",
+    "binding": "ASSETS"
+  },
+  "build": {
+    "command": "bun run build",
+    "cwd": ".",
+    "watch_dir": "src"
+  }
 }
