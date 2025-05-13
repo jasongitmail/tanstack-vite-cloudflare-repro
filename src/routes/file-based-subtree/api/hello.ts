@@ -1,9 +1,10 @@
 import { createServerFileRoute } from '@tanstack/react-start/server'
-import { getPlatformProxy } from "wrangler";
+import { getBindings } from '../../../lib/bindings';
+
 
 export const ServerRoute = createServerFileRoute().methods({
   GET: async (ctx) => {
-    const { env } = await getPlatformProxy<Env>();
+    const env = await getBindings();
     return Response.json(env);
   },
 });
