@@ -13,5 +13,9 @@
     "command": "bun run build",
     "cwd": ".",
     "watch_dir": "src"
+  },
+
+  "vars": {
+    "FROM_WRANGLER_CONFIG": "hello from wrangler config"
   }
 }

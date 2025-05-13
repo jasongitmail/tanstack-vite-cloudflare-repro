@@ -1,8 +1,9 @@
 import { createServerFileRoute } from '@tanstack/react-start/server'
+import { getPlatformProxy } from "wrangler";
 
 export const ServerRoute = createServerFileRoute().methods({
   GET: async (ctx) => {
-    console.info('hello server route called')
-    return new Response("Hello, World! from api/hello");
+    const { env } = await getPlatformProxy();
+    return Response.json(env);
   },
 });
