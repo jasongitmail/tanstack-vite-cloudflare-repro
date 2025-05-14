@@ -1,14 +1,5 @@
-/* @import 'tailwindcss';
+@import 'tailwindcss';
 
 html {
   color-scheme: light dark;
 }
-* {
-  @apply border-gray-200 dark:border-gray-800;
-}
-body {
-  @apply bg-red-200;
-}
-h1,h2,h3 {
-  @apply text-blue-600;
-} */
